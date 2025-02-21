@@ -1,8 +1,8 @@
 import model.*;
-import service.IrancellStore;
-import service.MCIStore;
+import service.*;
 import model.Product;
-import service.NetAndChargeStore;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -10,7 +10,8 @@ public class Main {
         IrancellStore irancellStore = new IrancellStore();
         NetAndChargeStore netChargeStore = new NetAndChargeStore();
         netChargeStore.fillWithOperatorStores(mciStore , irancellStore);
-        Product bestOfferedProduct = netChargeStore.getBestOffer();
-        System.out.println(bestOfferedProduct.getPrice());
+        System.out.println(netChargeStore.getChargeStorageCount());
+        System.out.println(netChargeStore.getInternetPackageStorageCount());
+        System.out.println(netChargeStore.getCustomerStorageCount());
     }
 }

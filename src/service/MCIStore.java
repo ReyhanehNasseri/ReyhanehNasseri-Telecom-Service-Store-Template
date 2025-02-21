@@ -1,9 +1,13 @@
 package service;
 
-import model.*;
+import model.Charge;
+import model.InternetPackage;
+import model.OperatorName;
+import model.TimePeriod;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class MCIStore extends OperatorStore {
 
@@ -33,7 +37,16 @@ public class MCIStore extends OperatorStore {
     }
 
     @Override
-    public List<Product> getProducts() {
-        return products;
+    public List<InternetPackage> getInternetPackages(){
+        return products.stream().filter(product-> product instanceof InternetPackage)
+                        .map(product -> (InternetPackage) product).collect(Collectors.toList());
     }
+
+    @Override
+    public List<Charge> getCharges(){
+        return products.stream().filter(product->(product instanceof Charge))
+                .map(product -> (Charge) product).collect(Collectors.toList());
+
+    }
+
 }

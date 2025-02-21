@@ -5,7 +5,10 @@ import model.OperatorName;
 import model.TimePeriod;
 import model.Charge;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class IrancellStore extends OperatorStore {
 
@@ -31,6 +34,17 @@ public class IrancellStore extends OperatorStore {
         this.addProduct(charge2);
         this.addProduct(charge3);
 
+    }
+    @Override
+    public List<InternetPackage> getInternetPackages() {
+            return products.stream().filter(product->product instanceof InternetPackage)
+                            .map(product -> (InternetPackage) product).collect(Collectors.toList());
+
+    }
+    @Override
+    public List<Charge> getCharges(){
+            return products.stream().filter(product-> product instanceof Charge)
+                            .map(product -> (Charge) product).collect(Collectors.toList());
     }
 
 }
